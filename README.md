@@ -85,17 +85,7 @@ Optional HTTP smoke test against a disposable running database: `python scripts/
 
 Read docs/API.md and docs/ARCHITECTURE.md for endpoint examples, entity diagram and business rules. src/main/resources/db/migration/V1__schema.sql is the database schema. The optional MERN migration bonus is not implemented. Payment records do not process bank cards or arrange actual delivery.
 
-## Submit this backend separately
 
-Create an empty GitHub repository named **ceylon-bites-backend**. From this folder run:
 
-```bash
-git init
-git add .
-git commit -m "Submit Spring Boot backend coursework"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/ceylon-bites-backend.git
-git push -u origin main
-```
 
 
