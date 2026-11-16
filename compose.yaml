@@ -1,0 +1,33 @@
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: ceylon_bites
+      MYSQL_USER: ceylon
+      MYSQL_PASSWORD: ${DB_PASSWORD:?Run scripts/setup.ps1 or scripts/setup.sh first}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Run the setup script first}
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  backend:
+    build: .
+    environment:
+      DB_URL: jdbc:mysql://mysql:3306/ceylon_bites?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      DB_USER: ceylon
+      DB_PASSWORD: ${DB_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET:?Run the setup script first}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@ceylon.test}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Run the setup script first}
+      CORS_ORIGINS: http://localhost:5173,http://127.0.0.1:5173,http://localhost:4173,http://127.0.0.1:4173
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+volumes:
+  mysql-data:

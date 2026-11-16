@@ -1,0 +1,33 @@
+server:
+  port: ${PORT:8080}
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/ceylon_bites?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+    username: ${DB_USER:ceylon}
+    password: ${DB_PASSWORD}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  flyway:
+    enabled: true
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+    issuer: ceylon-bites-api
+    ttl-minutes: 30
+  cors-origins: ${CORS_ORIGINS:http://localhost:5173,http://127.0.0.1:5173,http://localhost:4173,http://127.0.0.1:4173}
+  seed:
+    enabled: ${SEED_DATA:true}
+    admin-email: ${ADMIN_EMAIL:admin@ceylon.test}
+    admin-password: ${ADMIN_PASSWORD:}
+logging:
+  level:
+    lk.ceylonbites: INFO
