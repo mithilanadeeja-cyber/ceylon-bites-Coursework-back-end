@@ -39,7 +39,7 @@ mvn verify
 
 Nine backend integration tests passed before packaging. Tests use an isolated H2 database in MySQL compatibility mode. Separate live MySQL 8.4.7 HTTP and restart-persistence checks also passed; see docs/VERIFICATION.md. Docker/Windows setup was documented but not directly executed in the build environment.
 
-The executable JAR is generated at target/food-ordering-api-1.0.0.jar. Run it with `java -jar target/food-ordering-api-1.0.0.jar` after setting the same environment variables. It is not necessary to commit the JAR or target/ to GitHub.
+The executable JAR is generated at target/food-ordering-api-1.0.0.jar. Run it with `java -jar target/food-ordering-api-1.0.0.jar` after setting the same environment variables. 
 
 Optional HTTP smoke test against a disposable running database: `python scripts/api_smoke_test.py`. It requests an administrator password if ADMIN_PASSWORD is not in the environment and creates fictional test records. Do not run it against a production database.
 
