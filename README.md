@@ -1,4 +1,4 @@
-# Ceylon Bites — Backend Coursework
+1 Ceylon Bites — Backend Coursework
 
 CMJD Batch 112 · Backend Development with Spring Boot and MySQL
 
@@ -7,11 +7,8 @@ Student name: Y.M.M Nadeeja
 Backend repository: https://github.com/mithilanadeeja-cyber/ceylon-bites-Coursework-back-end
 
 
-## What this repository contains
 
-Spring Boot, Spring Data JPA, Spring Security JWT, MySQL/Flyway schema, eight entities, controller/service/repository layers, validation, logging, exception handling, role/ownership checks and integration tests. The React frontend is submitted in a separate repository.
-
-## Recommended Windows setup (Docker)
+2 Recommended Windows setup (Docker)
 
 1. Start Docker Desktop (Linux containers).
 2. Extract this archive and open **ceylon-bites-backend** in VS Code. pom.xml and compose.yaml should be directly inside this folder.
@@ -28,13 +25,14 @@ docker compose up --build -d
 
 The setup script generates private configuration in .env. The initial admin email is admin@ceylon.test; find ADMIN_PASSWORD inside .env. MySQL is started by this backend's compose.yaml. No separate MySQL installation is needed with Docker. New customers register through the frontend or API.
 
-macOS/Linux: `sh scripts/setup.sh`, then `docker compose up --build -d`.
+
 
 Stop safely: `docker compose down`. Start again: `docker compose up -d`. The database persists in a Docker volume. Do not use `down -v` unless you intend to erase its data. Changing .env after first initialization does not reset existing MySQL/admin passwords.
 
 
 
-## Tests and packaging
+
+3 Tests and packaging
 
 ```bash
 mvn verify
@@ -46,7 +44,9 @@ The executable JAR is generated at target/food-ordering-api-1.0.0.jar. Run it wi
 
 Optional HTTP smoke test against a disposable running database: `python scripts/api_smoke_test.py`. It requests an administrator password if ADMIN_PASSWORD is not in the environment and creates fictional test records. Do not run it against a production database.
 
-## Features and design
+
+4 Features and design
+
 
 - User: ADMIN / CUSTOMER; registration cannot select ADMIN.
 - Food: AVAILABLE / OUT_OF_STOCK; CRUD and soft deletion.
