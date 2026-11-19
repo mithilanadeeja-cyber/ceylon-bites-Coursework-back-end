@@ -32,31 +32,7 @@ macOS/Linux: `sh scripts/setup.sh`, then `docker compose up --build -d`.
 
 Stop safely: `docker compose down`. Start again: `docker compose up -d`. The database persists in a Docker volume. Do not use `down -v` unless you intend to erase its data. Changing .env after first initialization does not reset existing MySQL/admin passwords.
 
-## Manual setup without Docker
 
-Install a full JDK 21, Maven 3.9+ and MySQL 8.4. Create the database and an application user using MySQL Workbench:
-
-```sql
-CREATE DATABASE ceylon_bites CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER 'ceylon'@'localhost' IDENTIFIED BY 'REPLACE_WITH_YOUR_DB_PASSWORD';
-GRANT ALL PRIVILEGES ON ceylon_bites.* TO 'ceylon'@'localhost';
-```
-
-From this backend folder in PowerShell:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\setup.ps1
-Get-Content .env | Where-Object { $_ -match '^[A-Z_]+=' } | ForEach-Object {
-  $parts = $_ -split '=', 2
-  [Environment]::SetEnvironmentVariable($parts[0], $parts[1], 'Process')
-}
-$env:DB_USER = 'ceylon'
-$env:DB_PASSWORD = 'REPLACE_WITH_YOUR_DB_PASSWORD'
-$env:DB_URL = 'jdbc:mysql://localhost:3306/ceylon_bites?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC'
-mvn spring-boot:run
-```
-
-Use your actual database password. Leave this terminal running. Flyway creates the schema automatically; do not manually execute the migration as well.
 
 ## Tests and packaging
 
